@@ -13,7 +13,12 @@ public class Game {
 		int frameIndex=0;
 		for(int frame =0; frame<10 ; frame++)
 		{
-			if(isSpare(frameIndex))//spare
+			if(isStrike(frameIndex)) //strike
+			{
+				score += 10 + strikeBonus(frameIndex);
+				frameIndex ++;
+			}
+			else if(isSpare(frameIndex))//spare
 			{
 			score += 10+ rolls[frameIndex+2];
 			frameIndex += 2;
@@ -24,6 +29,16 @@ public class Game {
 			}
 		}
 		return score;
+	}
+
+	private boolean isStrike(int frameIndex) {
+		
+		return rolls[frameIndex]==10;
+	}
+
+	private int strikeBonus(int frameIndex) {
+		
+		return rolls[frameIndex+1]+ rolls[frameIndex+2];
 	}
 
 	private boolean isSpare(int frameIndex) {
